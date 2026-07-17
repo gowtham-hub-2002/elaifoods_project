@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elai Foods – Fresh &amp; Homely Meals</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Josefin+Sans:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons 1.11 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" type="image/png" href="Elai_log.png">
+</head>
+<body>
+
+<!-- ═══ PAGE LOAD INTRO OVERLAY ════════════════════════════ -->
+<div id="ef-page-loader" aria-hidden="true">
+  <div class="ef-loader-logo">
+    <img src="Elai_log.png" alt="Elai Foods">
+  </div>
+  <div class="ef-loader-brand">Elai Foods</div>
+  <div class="ef-loader-tagline">Your Morning Made Lighter</div>
+  <div class="ef-loader-bar-wrap">
+    <div class="ef-loader-bar"></div>
+  </div>
+</div>
+
+<!-- Gold cursor glow (JS positions it) -->
+<div class="ef-cursor-glow" id="efCursorGlow" aria-hidden="true"></div>
+
+<!-- ═══ FULL-PAGE WATER RIPPLE CANVAS ═══════════════════════════ -->
+<canvas id="ef-ripple-canvas"></canvas>
+
+<!-- HOME ANCHOR -->
+<div id="home" style="position:absolute;top:0;left:0;pointer-events:none;"></div>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<!-- Scroll To Top Button -->
+<button id="scrollTopBtn">
+  ↑
+</button>
+<nav class="navbar navbar-expand-lg ef-navbar sticky-top" id="mainNavbar">
+  <div class="container-xl">
+    <!-- Logo -->
+    <a class="navbar-brand ef-logo" href="#home">
+      <img src="Elai_log.png" alt="Elai Foods Logo" class="ef-logo-img">
+    </a>
+
+    <!-- Hamburger -->
+    <button class="navbar-toggler ef-toggler" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#mobileDrawer"
+            aria-controls="mobileDrawer" aria-label="Toggle navigation">
+      <i class="bi bi-list"></i>
+    </button>
+
+    <!-- Desktop links -->
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav ef-nav-links gap-1">
+        <li class="nav-item"><a class="nav-link ef-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link ef-link" href="#menu">Menu</a></li>
+        <li class="nav-item"><a class="nav-link ef-link" href="#app">App</a></li>
+        <li class="nav-item"><a class="nav-link ef-link" href="#delivery">How It Works</a></li>
+        <li class="nav-item"><a class="nav-link ef-link" href="#testimonials">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link ef-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link ef-link" href="#WhyElai">Why Elai ?</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Offcanvas Drawer -->
+<div class="offcanvas offcanvas-end ef-offcanvas" tabindex="-1" id="mobileDrawer">
+  <div class="offcanvas-header">
+    <span class="offcanvas-title ef-offcanvas-title">Elai Foods</span>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav ef-mobile-links">
+      <li class="nav-item"><a class="nav-link" href="#home" data-bs-dismiss="offcanvas"><i class="bi bi-house-door me-2"></i>Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="#menu" data-bs-dismiss="offcanvas"><i class="bi bi-journal-text me-2"></i>Menu</a></li>
+      <li class="nav-item"><a class="nav-link" href="#app" data-bs-dismiss="offcanvas"><i class="bi bi-phone me-2"></i>App</a></li>
+      <li class="nav-item"><a class="nav-link" href="#delivery" data-bs-dismiss="offcanvas"><i class="bi bi-bicycle me-2"></i>Delivery</a></li>
+      <li class="nav-item"><a class="nav-link" href="#testimonials" data-bs-dismiss="offcanvas"><i class="bi bi-star me-2"></i>Reviews</a></li>
+      <li class="nav-item"><a class="nav-link" href="#contact" data-bs-dismiss="offcanvas"><i class="bi bi-envelope me-2"></i>Contact</a></li>
+      <li class="nav-item"><a class="nav-link" href="#WhyElai" data-bs-dismiss="offcanvas"><i class="bi bi-journal-text me-2"></i>Why Elai ?</a></li>
+    </ul>
+  </div>
+</div>
+<!-- ============================================================
+     TICKER
+============================================================ -->
+<div class="ef-ticker">
+  <div class="ef-ticker-inner">
+    <span><i class="bi bi-calendar3 me-1"></i>6 Days a Week</span><span class="ef-sep">&#10022;</span>
+    <span><i class="bi bi-leaf-fill me-1"></i>No Preservatives</span><span class="ef-sep">&#10022;</span>
+    <span><i class="bi bi-heart-fill me-1"></i>Cooked With Love</span><span class="ef-sep">&#10022;</span>
+    <span><i class="bi bi-cup-hot-fill me-1"></i>Millet Powered Mornings</span><span class="ef-sep">&#10022;</span>
+    <span><i class="bi bi-calendar3 me-1"></i> Rotating Millet Based Menu</span><span class="ef-sep">&#10022;</span>
+    <span><i class="bi bi-sun me-1"></i>Smart Morning Breakfast</span><span class="ef-sep">&#10022;</span>
+    <span><i class="bi bi-calendar3 me-1"></i>Monthly Scheme</span><span class="ef-sep">&#10022;</span>  
+    <span><i class="bi bi-heart-fill me-1"></i>Gentle Energy Breakfast</span><span class="ef-sep">&#10022;</span>  
+    <span><i class="bi bi-calendar3 me-1"></i>6 Days a Week</span><span class="ef-sep">&#10022;</span>
+  </div>
+</div>
+<!-- ============================================================
+     HERO — full-screen video slideshow background
+============================================================ -->
+<section class="ef-hero" id="heroSection">
+
+  <!-- VIDEO SLIDESHOW BACKGROUND -->
+  <div class="ef-hero-videos" id="heroVideos">
+    <video class="ef-hero-vid active" autoplay muted playsinline loop="false" data-src="videos/Noodles.mp4">
+      <source src="videos/Noodles.mp4" type="video/mp4">
+    </video>
+    <video class="ef-hero-vid" muted playsinline loop="false" data-src="videos/Dosa.mp4">
+      <source src="videos/Dosa.mp4" type="video/mp4">
+    </video>
+    <video class="ef-hero-vid" muted playsinline loop="false" data-src="videos/Idli.mp4">
+      <source src="videos/Idli.mp4" type="video/mp4">
+    </video>
+    <video class="ef-hero-vid" muted playsinline loop="false" data-src="videos/Pongal.mp4">
+      <source src="videos/Pongal.mp4" type="video/mp4">
+      </video>
+      <video class="ef-hero-vid" muted playsinline loop="false" data-src="videos/.mp4">
+      <source src="videos/MondayLaunch.mp4" type="video/mp4">
+    </video>
+  </div>
+  <!-- Overlay gradient -->
+  <div class="ef-hero-overlay"></div>
+  <!-- Slide indicators -->
+  <div class="ef-hero-dots" id="heroDots">
+    <span class="ef-dot active" data-idx="0"></span>
+    <span class="ef-dot" data-idx="1"></span>
+    <span class="ef-dot" data-idx="2"></span>
+    <span class="ef-dot" data-idx="3"></span>
+     <span class="ef-dot" data-idx="4"></span>
+
+  </div>
+  <!-- Hero Content -->
+  <div class="container-xl h-100">
+    <div class="row h-100 align-items-top ef-hero-row">
+      <div class="col-lg-7 col-xl-6 ef-hero-content">
+        <p class="ef-hero-tag fw-bold" >
+          <i class="bi bi-stars me-1"></i>Fresh &middot; Homely &middot; Delivered
+        </p>
+        <h1 class="ef-hero-title">Real Food,<br><span class="ef-hero-highlight">Real Love</span></h1>
+        <p class="ef-hero-sub">
+          We prepare light, balanced, millet-based fresh breakfast &amp; lunch deliver it to your doorstep.</p>
+        <div class="ef-quote-strip">
+          <span class="ef-quote-mark">&ldquo;</span>
+          <span class="ef-quote-text">The secret ingredient is always love.</span>
+          <span class="ef-quote-mark">&rdquo;</span>
+        </div>
+        <div class="d-flex flex-wrap gap-3 mb-4">
+          <a href="#menu" class="ef-btn-primary">
+            <i class="bi bi-journal-text me-2"></i>View Menu
+          </a>          
+        </div>
+        <!-- Stats -->
+        <div class="ef-stats">
+          <div class="ef-stat">
+            <span class="ef-stat-num">100 %</span>
+            <span class="ef-stat-label">Homemade</span>
+          </div>
+          <div class="ef-stat-div"></div>
+          <div class="ef-stat">
+            <span class="ef-stat-num">50+</span>
+            <span class="ef-stat-label">Varieties of Dishes</span>
+          </div>
+          <div class="ef-stat-div"></div>
+          <div class="ef-stat">
+            <span class="ef-stat-num">6</span>
+            <span class="ef-stat-label">Days Weekly</span>
+          </div>
+          <div class="ef-stat-div"></div>
+          <div class="ef-stat">
+            <span class="ef-stat-num">2 km</span>
+            <span class="ef-stat-label">Delivery Range</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================================================
+     MENU
+============================================================ -->
+<section class="ef-section ef-menu-section" id="menu">
+  <div class="ef-orbs">
+    <div class="ef-orb ef-orb-1"></div>
+    <div class="ef-orb ef-orb-2"></div>
+  </div>
+  <div class="container-xl" style="position:relative;z-index:1;">
+    <div class="ef-section-header text-center mb-5">
+      <div class="ef-eyebrow"><i class="bi bi-flower1 me-1"></i>Our Menu<i class="bi bi-flower1 ms-1"></i></div><br/>
+      <h2>What's on the Leaf Today?</h2>
+      <p>Every meal cooked with care, served with soul.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="d-flex justify-content-center gap-3 mb-5 flex-wrap" id="menuTabs">
+      <button class="ef-tab active" data-tab="breakfast">
+        <i class="bi bi-brightness-high me-2"></i>Breakfast
+      </button>
+      <button class="ef-tab" data-tab="lunch">
+        <i class="bi bi-sun me-2"></i>Lunch
+      </button>
+    </div>
+
+    <!-- Breakfast Tab -->
+    <div class="ef-tab-content active" id="breakfast">
+      <div class="row g-4">
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/Dosa.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Monday</span>
+              <h4>Dosa Varieties</h4>
+              <p>Pearl Millet Dosa / Sorghum Dosa / Adai Dosa / Finger Millet Dosa / Green Gram Dosa / Multi Millet.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/Pongal.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Tuesday</span>
+              <h4>Pongal Varieties</h4>
+              <p>Little Millet / Kodo Millet / Barnyard Millet / Foxtail Millet.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/Chapati.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Wednesday</span>
+              <h4>Chapati Varieties</h4>
+              <p>Wheat / Phulka / Aloo Paratha / Ragi / Jower / Palak / Pesarathu.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/Noodles.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Thursday</span>
+              <h4>Noodle Varieties</h4>
+              <p>Rice Noodles / Wheat Noodles / Ragi Noodles.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/Idli.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Friday</span>
+              <h4>Idli Varieties</h4>
+              <p>Ragi / Pearl Millet / Rava / Bajra.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/Kichadi.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Saturday</span>
+              <h4>Kichadi Varieties</h4>
+              <p>Rava / Barnyard Millet / Kodo Millet / Little Millet.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Lunch Tab -->
+    <div class="ef-tab-content" id="lunch">
+      <div class="row g-4">
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/MondayLaunch.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Monday</span>
+              <h4>Chayote Moong Dal Curry Meal</h4>
+              <p>Rasam · Buttermilk · Drumstick Kootu · Potato Fry · Cauliflower Fry · Brinjal Fry · Banana Fry · Beetroot Poriyal · Cabbage Poriyal · Radish Poriyal · Broad Beans Stir-Fry · Ridge Gourd Stir-Fry · Peas Kootu</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/TuesDayLaunch.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Tuesday</span>
+              <h4>Traditional Sambar Meal</h4>
+              <p>Rasam · Buttermilk · Appalam · Drumstick Kootu · Potato Fry · Cauliflower Fry · Brinjal Fry · Banana Fry · Beetroot Poriyal · Cabbage Poriyal · Radish Poriyal · Broad Beans Stir-Fry · Ridge Gourd Stir-Fry · Peas Kootu</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/MondayLaunch.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Wednesday</span>
+              <h4>Kurma Special</h4>
+              <p>Peas Kurma · White Chickpea Kurma · Rasam · Buttermilk · Spinach Poriyal · Beans Poriyal · Broad Beans Stir-Fry</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/TuesDayLaunch.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Thursday</span>
+              <h4>Puli Kuzhambu Special</h4>
+              <p>Chickpeas · Brinjal Fry · Ladies' Finger Fry · Drumstick Kootu · Potato Fry · Cauliflower Fry · Banana Fry · Beetroot Poriyal · Cabbage Poriyal · Radish Poriyal · Broad Beans Stir-Fry · Ridge Gourd Stir-Fry · Peas Kootu</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/MondayLaunch.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Friday</span>
+              <h4>Sambar Meal</h4>
+              <p>Rasam · Buttermilk · Appalam · Payasam · Drumstick Kootu · Potato Fry · Cauliflower Fry · Brinjal Fry · Banana Fry · Beetroot Poriyal · Cabbage Poriyal · Radish Poriyal · Broad Beans Stir-Fry · Ridge Gourd Stir-Fry · Peas Kootu</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-4">
+          <div class="ef-card">
+            <div class="ef-card-media">
+              <video autoplay muted loop playsinline class="ef-card-video">
+                <source src="videos/TuesDayLaunch.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="ef-card-body">
+              <span class="ef-day-badge">Saturday</span>
+              <h4>Vathal Kuzhambu / Ladies' Finger Kuzhambu</h4>
+              <p>Drumstick Kootu · Potato Fry · Cauliflower Fry · Brinjal Fry · Banana Fry · Beetroot Poriyal · Cabbage Poriyal · Radish Poriyal · Broad Beans Stir-Fry · Ridge Gourd Stir-Fry · Peas Kootu</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     APP DOWNLOAD
+============================================================ -->
+<section class="ef-app-section" id="app">
+  <div class="ef-app-bg-pattern"></div>
+  <div class="container-xl position-relative">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7">
+        <div class="ef-eyebrow text-success" style="text-align:right;">
+          <i class="bi bi-flower1 me-1"></i>Get The App<i class="bi bi-flower1 ms-1"></i>
+        </div>
+        <h2 class="ef-app-title"><span class="ef-app-highlight">Elai Foods App</span></h2>
+        <p class="ef-app-desc">Download our app for the easiest ordering experience — track your meal, get exclusive deals, and never miss your favourite daily special.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#" class="ef-store-btn">
+            <i class="bi bi-google-play" style="font-size:1.4rem;"></i>
+            <div>
+              <small>Download on the</small>
+              <strong>Play Store</strong>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5 d-flex justify-content-center justify-content-lg-end">
+        <div class="ef-qr-card">
+          <div class="ef-qr-label">
+            <i class="bi bi-qr-code-scan me-2"></i>Scan QR App Download
+          </div>
+          <div class="ef-qr-box">
+            <img src="QR_Code.svg.png" alt="Elai Foods App QR Code" class="ef-qr-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DELIVERY
+============================================================ -->
+<section class="ef-section ef-delivery-section" id="delivery">
+  <div class="container-xl">
+    <div class="ef-section-header text-center mb-5 light">
+      <div class="ef-eyebrow"><i class="bi bi-flower1 me-1"></i>How It Works<i class="bi bi-flower1 ms-1"></i></div><br/>
+      <h2>We Come to You</h2>
+      <p>Hot meals, right at your door. Here's how it works.</p>
+    </div>
+
+    <!-- Steps row -->
+    <div class="row justify-content-center align-items-center g-3 mb-5">
+      <div class="col-6 col-sm-5 col-md-auto">
+        <div class="ef-step">
+          <div class="ef-step-icon"><i class="bi bi-phone"></i></div>
+          <h4>1. Place Order</h4>
+          <p>Please pre-book your food orders one day in advance by 9 PM for next day delivery.</p>
+        </div>
+      </div>
+      <div class="col-auto d-none d-md-block"><span class="ef-step-arrow"><i class="bi bi-arrow-right"></i></span></div>
+      <div class="col-6 col-sm-5 col-md-auto">
+        <div class="ef-step">
+          <div class="ef-step-icon"><i class="bi bi-person-heart"></i></div>
+          <h4>2. We Cook</h4>
+          <p>Fresh ingredients, cooked with love in our clean home kitchen.</p>
+        </div>
+      </div>
+      <div class="col-auto d-none d-md-block"><span class="ef-step-arrow"><i class="bi bi-arrow-right"></i></span></div>
+      <div class="col-6 col-sm-5 col-md-auto">
+        <div class="ef-step">
+          <div class="ef-step-icon"><i class="bi bi-bicycle"></i></div>
+          <h4>3. Delivered Hot</h4>
+          <p>Packed hygienically and delivered warm to your doorstep.</p>
+        </div>
+      </div>
+      <div class="col-auto d-none d-md-block"><span class="ef-step-arrow"><i class="bi bi-arrow-right"></i></span></div>
+      <div class="col-6 col-sm-5 col-md-auto">
+        <div class="ef-step">
+          <div class="ef-step-icon"><i class="bi bi-emoji-smile"></i></div>
+          <h4>4. Enjoy!</h4>
+          <p>Sit back and enjoy a wholesome home-cooked meal.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info cards row -->
+    <div class="row justify-content-center align-items-center g-3">
+      <div class="col-6 col-sm-5 col-md-auto">
+        <div class="ef-dinfo">
+          <i class="bi bi-egg-fried ef-dinfo-icon"></i>
+          <h5>Breakfast & Lunch</h5>
+          <p>7:00 AM – 9:00 AM</p>
+        </div>
+      </div>
+      <div class="col-auto d-none d-md-block"><span class="ef-step-arrow"><i class="bi bi-arrow-right"></i></span></div>
+      <div class="col-6 col-sm-5 col-md-auto">
+        <div class="ef-dinfo">
+          <i class="bi bi-geo-alt-fill ef-dinfo-icon"></i>
+          <h5>Delivery Area</h5>
+          <p>Within 2 km radius</p>
+        </div>
+      </div>
+      <div class="col-auto d-none d-md-block"><span class="ef-step-arrow"><i class="bi bi-arrow-right"></i></span></div>
+      <div class="col-6 col-sm-5 col-md-auto">
+        <div class="ef-dinfo">
+          <i class="bi bi-calendar-check-fill ef-dinfo-icon"></i>
+          <h5>Available Days</h5>
+          <p>Monday To Saturday</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section class="ef-section ef-testimonials" id="testimonials">
+  <div class="container-xl">
+    <div class="ef-section-header text-center mb-5">
+      <div class="ef-eyebrow"><i class="bi bi-flower1 me-1"></i>Happy Customers<i class="bi bi-flower1 ms-1"></i></div><br/>
+      <h2>What Our Customers Say <i class="bi bi-chat-quote-fill ms-1" style="font-size:.85em;color:var(--green-primary)"></i></h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="ef-review-card">
+          <div class="ef-stars">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="ef-review-text">"The idiyappam is exactly like my mom used to make! Soft, fresh and utterly delicious. I order every single morning now."</p>
+          <div class="ef-reviewer">
+            <div class="ef-avatar">P</div>
+            <div>
+              <strong class="ef-reviewer-name">Priya S.</strong>
+              <span class="ef-reviewer-role">Gottigere, Bangalore.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ef-review-card">
+          <div class="ef-stars">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="ef-review-text">"Lunch is an absolute feast — reminds me of home. The sambar and payasam are out of this world. Worth every rupee!"</p>
+          <div class="ef-reviewer">
+            <div class="ef-avatar">R</div>
+            <div>
+              <strong class="ef-reviewer-name">Rajan K.</strong>
+              <span class="ef-reviewer-role">Gottigere, Bangalore.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ef-review-card">
+          <div class="ef-stars">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="ef-review-text">"Delivery is always on time and the food is piping hot. The breakfast chapati-kurma combo is my favourite. Highly recommended!"</p>
+          <div class="ef-reviewer">
+            <div class="ef-avatar">M</div>
+            <div>
+              <strong class="ef-reviewer-name">Meena T.</strong>
+              <span class="ef-reviewer-role">Gottigere, Bangalore.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+============================================================ -->
+<section class="ef-section ef-contact" id="contact">
+  <div class="container-xl">
+    <div class="ef-section-header text-center mb-5">
+      <div class="ef-eyebrow"><i class="bi bi-flower1 me-1"></i>Contact<i class="bi bi-flower1 ms-1"></i></div><br/>
+      <h2>Come Say Hello <i class="bi bi-hand-wave-fill ms-1" style="font-size:.85em;color:var(--gold-primary)"></i></h2>
+      <p>We'd love to hear from you — follow us, call us, or just drop by!</p>
+    </div>
+
+    <!-- Contact Strip -->
+    <div class="ef-contact-strip mb-5">
+      <div class="ef-strip-item">
+        <div class="ef-strip-icon"><i class="bi bi-telephone-fill"></i></div>
+        <div>
+          <strong>Phone</strong>
+          <a href="tel:+919999999999">+91 99999 99999</a>
+        </div>
+      </div>
+      <div class="ef-strip-divider"></div>
+      <div class="ef-strip-item">
+        <div class="ef-strip-icon"><i class="bi bi-geo-alt-fill"></i></div>
+        <div>
+          <strong>Location</strong>
+          <span>103, Husaini Residency, Bora Layout, Bannergatta Road, Gottigere, Bangalore - 560083.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Cards -->
+    <p class="ef-social-label">Follow</p>
+    <div class="row g-3">
+      <div class="col-sm-6 col-lg-3">
+          <a href="tel:+919110633901">+91 91106 33901</a>
+          <div class="ef-scard-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </div>
+          <div class="ef-scard-body"><strong>WhatsApp</strong><span>Chat with us directly</span></div>
+          <i class="bi bi-arrow-right ef-scard-arrow"></i>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <a href="https://www.facebook.com/share/17eA5YB6hg/" target="_blank" class="ef-scard ef-scard-fb">
+          <div class="ef-scard-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </div>
+          <div class="ef-scard-body"><strong>Facebook</strong><span>Like our page</span></div>
+          <i class="bi bi-arrow-right ef-scard-arrow"></i>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <a href="https://www.instagram.com/elai_foods?igsh=bnBzaGUxYjgzMzdp" target="_blank" class="ef-scard ef-scard-ig">
+          <div class="ef-scard-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
+          <div class="ef-scard-body"><strong>Instagram</strong><span>See our daily meals</span></div>
+          <i class="bi bi-arrow-right ef-scard-arrow"></i>
+        </a>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <a href="https://youtube.com" target="_blank" class="ef-scard ef-scard-yt">
+          <div class="ef-scard-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </div>
+          <div class="ef-scard-body"><strong>YouTube</strong><span>Watch our kitchen</span></div>
+          <i class="bi bi-arrow-right ef-scard-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================================================
+     WHY ELAI — Full-Screen Immersive Banana Leaf Section
+============================================================ -->
+<section class="ef-why2-section" id="WhyElai">
+  <!-- Parallax leaf overlay layers -->
+  <div class="ef-why2-leaf-left"></div>
+  <div class="ef-why2-leaf-right"></div>
+  <div class="ef-why2-overlay"></div>
+
+  <!-- Floating ambient particles -->
+  <div class="ef-why2-particles" aria-hidden="true">
+    <span class="ef-p ef-p1">✦</span>
+    <span class="ef-p ef-p2">✦</span>
+    <span class="ef-p ef-p3">✧</span>
+    <span class="ef-p ef-p4">✦</span>
+    <span class="ef-p ef-p5">✧</span>
+    <span class="ef-p ef-p6">✦</span>
+  </div>
+
+  <div class="ef-why2-inner">
+
+    <!-- ── Section eyebrow ── -->
+    <div class="ef-why2-eyebrow" data-reveal>
+      <span class="ef-why2-eyebrow-line"></span>
+      <span>Why Elai Foods</span>
+      <span class="ef-why2-eyebrow-line"></span>
+    </div>
+
+    <!-- ── Hero headline ── -->
+    <h2 class="ef-why2-headline" data-reveal data-delay="100">
+      <span class="ef-why2-hl-top">Your Morning,</span>
+      <em class="ef-why2-hl-em">Made Lighter</em>
+    </h2>
+
+    <!-- ── Divider leaf ── -->
+    <div class="ef-why2-leaf-divider" data-reveal data-delay="180">
+      <span class="ef-why2-ld-line"></span>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--gold-primary)" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 22c1.99-1 4.99-1 5.18-1C9 21 13 17 13 17s-1 4-3 6c5-2 9.79-8.43 6-15zm-.32-5C15.42 4.74 15 6.31 15 8c0 3.31 2.69 6 6 6 0 0 .42-1.57-1.68-4.32C17.49 7.3 15 4 15 4l1.68-1z"/></svg>
+      <span class="ef-why2-ld-line"></span>
+    </div>
+
+    <!-- ── Story cards row ── -->
+    <div class="ef-why2-cards">
+
+      <!-- Card 1 — The Problem -->
+      <div class="ef-why2-card ef-wc-problem" data-reveal data-delay="200">
+        <div class="ef-wc-accent-bar"></div>
+        <div class="ef-wc-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="ef-wc-label">The Reality</div>
+        <h3 class="ef-wc-title">Mornings are hard enough</h3>
+        <p class="ef-wc-body">Getting ready for work, taking care of children, managing home and commute — preparing a balanced breakfast becomes the first thing we sacrifice.</p>
+        <div class="ef-wc-quote">
+          <span class="ef-wc-qmark">"</span>
+          <span class="ef-wc-qtext">Not by choice — but by time.</span>
+          <span class="ef-wc-qmark">"</span>
+        </div>
+      </div>
+
+      <!-- Card 2 — The Solution -->
+      <div class="ef-why2-card ef-wc-solution" data-reveal data-delay="320">
+        <div class="ef-wc-accent-bar"></div>
+        <div class="ef-wc-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 5-5 13-5 13S7 12 7 7a5 5 0 0 1 5-5z"/><circle cx="12" cy="7" r="2"/></svg>
+        </div>
+        <div class="ef-wc-label">Our Promise</div>
+        <h3 class="ef-wc-title">Simple, balanced, home-style</h3>
+        <p class="ef-wc-body">Elai Foods removes that morning burden. We prepare fresh millet-based breakfasts so you can focus on what truly matters.</p>
+        <div class="ef-wc-checklist">
+          <div class="ef-wc-check"><span class="ef-wc-tick">✔</span>Your fitness</div>
+          <div class="ef-wc-check"><span class="ef-wc-tick">✔</span>Your family</div>
+          <div class="ef-wc-check"><span class="ef-wc-tick">✔</span>Your day ahead</div>
+        </div>
+      </div>
+
+      <!-- Card 3 — Service -->
+      <div class="ef-why2-card ef-wc-service" data-reveal data-delay="440">
+        <div class="ef-wc-accent-bar"></div>
+        <div class="ef-wc-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="ef-wc-label">Service Details</div>
+        <h3 class="ef-wc-title">Fresh to your door</h3>
+        <p class="ef-wc-body">No rush cooking. No heavy hotel food. Just a thoughtful, wholesome start — delivered fresh every morning in Gottigere.</p>
+        <div class="ef-wc-chips">
+          <span class="ef-wc-chip">🏠 Home-style</span>
+        </div><br/>
+           <div class="ef-wc-chips">
+          <span class="ef-wc-chip">📍 Gottigere</span>
+        </div>
+      </div>
+
+    </div><!-- /.ef-why2-cards -->
+
+    <!-- ── Bottom tagline ── -->
+    <div class="ef-why2-tagline" data-reveal data-delay="560">
+      <span class="ef-why2-tl-em">No rush. No compromise.</span>
+      <span class="ef-why2-tl-plain"> — Just your morning, made lighter.</span>
+    </div>
+  </div>
+</section>
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="ef-footer">
+  <div class="ef-footer-inner text-center">
+    <div class="mb-2">
+      <span class="ef-logo-text">Elai Foods</span>
+    </div>
+    <p class="ef-footer-tagline">
+      <i class="bi bi-leaf-fill me-1"></i>Homemade with Love — Fresh, Healthy &amp; Delivered Daily<i class="bi bi-tree-fill ms-1"></i>
+    </p>
+    <p class="ef-footer-copy">&copy; 2026 Elai Foods. All rights reserved.</p>
+  </div>
+</footer>
+<!-- Bootstrap 5.3 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
+
